@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>详情</title>
+
+		<link rel="stylesheet" href="js/swiper/swiper.min.css" />
+
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+				font-family: "微软雅黑";
+			}
+			
+			.wrap {
+				margin: 0 auto;
+			}
+			
+			.tabs {
+				height: 32px;
+				background: #13D7FD;
+				width: 100%;
+				padding-top: 8px;
+				text-align: center
+			}
+			
+			.tabs .part {
+				display: block;
+				float: left;
+				width: 33%;
+				color: #fff;
+				text-align: center;
+				height: 20px;
+			}
+			
+			.tabs .part:first-child {
+				border-right: 1px solid #ADDAFD;
+			}
+			
+			.tabs a {
+				width: 70px;
+				display: block;
+				color: #fff;
+				text-align: center;
+				margin: 0 auto;
+				font-size: 16px;
+				text-decoration: none;
+				padding-bottom: 2px;
+			}
+			
+			.tabs span.active a {
+				color: #fff;
+				border-bottom: 2px solid #fff;
+			}
+			
+			.swiper-container {
+				width: 100%;
+				border-top: 0;
+				/* margin-top: 10px !important; */
+				/* background: #1589F4; */
+				background: linear-gradient(to top right, #176CF2, #1589F4, #13D7FD);
+				padding: 1rem;
+				box-sizing: border-box;
+			}
+			
+			.swiper-slide {
+				width: 100%;
+				background: none;
+				color: white;
+			}
+			
+			p {
+				text-align: center;
+			}
+			
+			.swiper-wrapper,
+			.swiper-slide {
+				height: 100% !important;
+			}
+		</style>
+
+	</head>
+
+	<body class="bgc_gray">
+
+		<div class="pg-main">
+
+			<div id="wrapper">
+				<!--header end-->
+				<div class="wrap">
+					<div class="tabs">
+						<span class="part active" data-type="1"><a href="#" hidefocus="true">投注记录</a></span>
+						<span class="part" data-type="2" style="border-right: 1px solid #ADDAFD" id="two"><a href="#"
+                            hidefocus="true">充值记录</a></span>
+						<span class="part" data-type="3"><a href="#" hidefocus="true">盈亏报表</a></span>
+					</div>
+
+					<div class="swiper-container">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide swiper-slide-visible swiper-slide-active">
+								<div class="content-slide">
+									<div class="one"></div>
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="content-slide">
+									<div class="two"></div>
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="content-slide">
+									<div class="three"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<script type="text/javascript" src="js/zepto.min.js"></script>
+		<script type="text/javascript" src="js/swiper/idangerous.swiper.min.js"></script>
+		<!-- <script src="js/utils.js" type="text/javascript" charset="utf-8"></script> -->
+		<script type="text/javascript">
+			$(function() {
+				var tabsSwiper;
+				tabsSwiper = new Swiper('.swiper-container', {
+					speed: 500,
+					onSlideChangeStart: function() {
+						$(".tabs .active").removeClass('active');
+						// $(".tabs span").eq(tabsSwiper.activeIndex).addClass('active');
+					}
+				});
+				$(".tabs span").on('touchstart mousedown', function(e) {
+					e.preventDefault()
+					var type = $(this).data("type")
+					$(".tabs .active").removeClass('active');
+					$(this).addClass('active');
+					tabsSwiper.swipeTo($(this).index());
+					fnAjax(type)
+				});
+				$(".tabs span").click(function(e) {
+					e.preventDefault();
+				});
+
+				function fnAjax(type) {
+					// 获取接口        
+					var data = {
+						"openId": window.localStorage.getItem("myid") || [],
+						"type": type
+					}
+					$.ajax({
+						type: "POST",
+						url: 'https://www.shangdll.com//personCenter/userDetails',
+						data: JSON.stringify(data),
+						dataType: "json",
+						contentType: 'application/json; charset=UTF-8',
+						success: function(data) {
+							console.log(data)
+							console.log(type)
+							var arr = data;
+							var html = "";
+							if(type == " 1") {
+								for(let i = 0; i < arr.length; i++) {
+									html += `<div>
+			                   微信昵称:${arr[i].username}
+			                </div><div>
+			                   投注时间:${arr[i].bettingDate}
+			                </div><div>
+			                   投注金额:${arr[i].bettingMoney}
+			                </div><div>
+			                   赢得的金币数:${arr[i].gameGold}
+			                </div><div>
+			                   投注号码:${arr[i].investNo}
+			                </div>`
+									$('.one').html(html)
+								}
+
+								//                          $.each(data.memberInfoList, function (idx, val) {
+								//                              console.log(val)
+								//                              //根据id获取详情数据
+								//                              if (id == val.openId) {
+								//                                  var str = "<img src='" + val.headUrl + "'/><p>出版编号：" +
+								//                                      val.openId + "</p><p>出版社：" + val.publish +
+								//                                      "</p><p>页数：" + val.userName + "</p>";
+								//                                  console.log('index:' + idx);
+								//                              }
+								//                              $('.booksDeatail').append(str);
+								//                          });
+
+							} else if(type == "2") {
+								for(let i = 0; i < arr.length; i++) {
+									html += `<div>
+			                   微信昵称:${arr[i].username}
+			                </div><div>
+                                充值金额:${arr[i].finishTime}
+			                </div><div>
+                                充值金额:${arr[i].surplusDiamond}
+			                </div><div>
+                                充值金额:${arr[i].createTime}
+			                </div><div>
+                                充值金额:${arr[i].price}
+			                </div>`
+									$('.two').html(html)
+								}
+							} else if(type == "3") {
+								for(let i = 0; i < arr.length; i++) {
+									html += `<div>
+                                        总计亏损:${arr[i].loss}
+			                </div><div>
+                                    累计投注 :${arr[i].totalBet}
+			                </div><div>
+                                    总计盈利:${arr[i].profit}
+			                </div>`
+									$('.three').html(html)
+								}
+							}
+						},
+						error: function() {
+							console.log("错误")
+						}
+					});
+				}
+				fnAjax(1)
+			});
+		</script>
+
+	</body>
+
+</html>

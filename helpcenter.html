@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>帮助中心</title>
+</head>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .helpcenter {
+        width: 100%;
+        text-align: center;
+        padding: 0.5rem;
+        box-sizing: border-box;
+        font-size: 1rem;
+    }
+
+    .strategy {
+        width: 100%;
+        padding: 0.5rem;
+        box-sizing: border-box;
+        font-size: 0.9rem;
+        background: gainsboro;
+    }
+
+    .demo img {
+        width: 1.5rem;
+        height: 1.5rem;
+        transition: all 1s;
+    }
+
+    .demo {
+        width: 100%;
+        background: ghostwhite;
+        display: flex;
+        justify-content: space-between;
+        padding: 0.7rem;
+        box-sizing: border-box;
+        border-bottom: 1px solid gainsboro;
+        font-size: 1rem;
+    }
+
+    .demoul {
+        width: 100%;
+        background: gainsboro;
+        padding: 0.7rem;
+        box-sizing: border-box;
+        font-size: 0.9rem;
+    }
+
+    .active {
+        transform: rotate(180deg);
+    }
+</style>
+
+<body>
+    <!-- <div class="helpcenter"> <b>帮助中心</b></div> -->
+    <div class="strategy">挖矿攻略</div>
+</body>
+<script>
+    $.ajax({
+        type: "GET",
+        url: "http://www.shangdll.com/helpCenter/queryList",
+        success(res) {
+            console.log(res)
+            var arr = res;
+            for (let i = 0; i < arr.length; i++) {
+                console.log(i,'000000')
+                $('body').append(
+                    `<div class = 'demo'>${i+1+"、"+arr[i].title}<img src='img/up.png'/></div><ul class = 'demoul' style='display:none;'></ul>`
+                );
+                $.ajax({
+                    type: "GET",
+                    url: "http://www.shangdll.com/helpCenter/queryDetails?id=" + arr[i].id,
+                    success(result) {
+                        var array = result;
+                        $($('.demo')[i]).next('ul').append(`<li>${array.content}</li>`)
+                        $($('.demo')[i]).click(function () {
+                            $(this).next('ul').slideToggle();
+                            $(this).children('img').toggleClass('active')
+                        })
+                        // for (var j = 0; j < array.length; j++) {
+                        // $($('demo')[i]).next('ul').append(`<li>${array[i].content}</li>`)
+                        // }
+                    }
+                })
+            }
+        }
+    })
+</script>
+
+</html>

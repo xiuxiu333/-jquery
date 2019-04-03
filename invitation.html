@@ -1,0 +1,351 @@
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>我的邀请</title>
+</head>
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	body {
+		background: url(./img/bj.png) top center no-repeat;
+		background-size: cover;
+	}
+
+	.heade {
+		width: 100%;
+		padding: 1rem;
+		text-align: center;
+		box-sizing: border-box;
+		font-family: PingFang-SC-Bold;
+		color: rgba(255, 255, 255, 1);
+		font-weight: bold;
+	}
+
+	.wh {
+		width: 1.3rem;
+		height: 1.3rem;
+		margin-left: 0.5rem;
+	}
+
+	a {
+		text-decoration: none;
+	}
+
+	.tabbox {
+		margin: 10px;
+	}
+
+	.tabbox ul {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.tabbox ul li {
+		width: 100px;
+		line-height: 30px;
+		text-align: center;
+		cursor: pointer;
+	}
+
+	.tabbox ul li.active {
+		font-weight: bold;
+		/* text-decoration: underline */
+		border-bottom: 2px solid white;
+	}
+
+	.tabbox .content {
+		border: 1px solid #aaccff;
+		/* padding: 1rem; */
+		box-sizing: border-box;
+		background: rgba(255, 255, 255, 1);
+		border-radius: 0.5rem;
+		margin-top: 1rem;
+		text-align: center;
+	}
+
+	.tabbox .content>div {
+		display: none;
+	}
+
+	.tabbox .content>div.active {
+		display: block;
+	}
+
+	.pic {
+		width: 4.5em;
+		height: 4.5rem;
+		border-radius: 50%;
+		margin: auto;
+		margin-top: 1rem;
+	}
+
+	.pic img {
+		width: 4.5rem;
+		height: 4.5rem;
+		border-radius: 50%;
+	}
+
+	.classify {
+		color: #aaccff;
+		width: 100%;
+		display: flex;
+	}
+
+	.classify li {
+		width: 25%;
+		font-size: 1rem;
+	}
+
+	.classify p {
+		font-size: 0.5rem;
+	}
+
+	.blue {
+		width: 100%;
+		background: skyblue;
+		display: flex;
+		justify-content: space-between;
+		padding: 0.5rem;
+		font-size: 0.5rem;
+		box-sizing: border-box;
+		border-radius: 0.5rem;
+	}
+
+	/* .member {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			margin-top: 1rem;
+			justify-content: space-between;
+			border-bottom: 1px solid gainsboro;
+			padding: 0.5rem;
+			box-sizing: border-box;
+		}
+		
+		.member .member_xinxi {
+			display: flex;
+			align-items: center;
+		} */
+
+	.nomore {
+		width: 100%;
+		padding: 1rem;
+		box-sizing: border-box;
+		color: grey;
+	}
+
+	.mun .munn {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		font-size: 0.8rem;
+		padding: 0.5rem;
+		box-sizing: border-box;
+		border: 2px solid ghostwhite;
+		text-align: left;
+		text-overflow: ellipsis;
+	}
+
+	.mun .munn2 {
+		padding: 0.5rem;
+		box-sizing: border-box;
+	}
+
+
+	.try .con_ul .big {
+		display: flex;
+		align-items: center;
+		border-bottom: 2px solid gainsboro;
+		padding: 0.5rem;
+		box-sizing: border-box;
+		justify-content: space-between;
+	}
+
+	.xiao {
+		color: black;
+	}
+
+	.pict {
+		width: 3rem;
+		height: 3rem;
+		border-radius: 50%;
+	}
+
+	.big .yi {
+		width: 55%;
+		height: 1.2rem;
+		margin-top: 0.5rem;
+
+	}
+
+	.big .kai {
+		width: 8%;
+		height: 1.5rem;
+	}
+
+	.big .bigone {
+		display: flex;
+		justify-content: space-between;
+	}
+</style>
+
+<body>
+
+	<div class="tabbox">
+		<ul>
+			<li class="active" style="color:white">我邀请的人</li>
+			<li style="color:white">排行榜</li>
+		</ul>
+		<div class="content">
+			<div class="active">
+				<div class="pic"> </div>
+				<p class="yaoqin"> </p>
+				<p>好友 ：<b class="goodfriend"></b> </p>
+				<ul class="classify">
+					<li>
+						<span>总收益</span>
+						<p class="totalrevenue"></p>
+					</li>
+					<li>
+						<span>邀请奖励</span>
+						<p class="schemes"></p>
+					</li>
+				</ul>
+				<div class="blue">
+					<div>成员</div>
+					<div>
+						任务分成/消费分成/邀请奖励/新人红包
+					</div>
+				</div>
+
+				<!-- 排行榜 -->
+				<div class="try"></div>
+				<!-- 没有更多数据 -->
+				<div class="nomore">
+					<img src="./img/xin.jpg" alt="" style="border-radius:50%;width: 6rem;height: 5rem;">
+					<div>没有更多数据</div>
+				</div>
+			</div>
+			<div>
+				<!-- 成员 -->
+				<div class="mun"></div>
+			</div>
+		</div>
+	</div>
+	<script src="./js/jquery-3.3.1.min.js"></script>
+	<!-- <script src="./js/utils.js" type="text/javascript" charset="utf-8"></script> -->
+	<script type="text/javascript">
+		// console.log(getopenid)
+		$(function () {
+			$(".tabbox li").click(function () {
+				$(this).addClass("active").siblings().removeClass("active");
+				var index = $(this).index();
+				$(this).parent().siblings().children().eq(index).addClass("active")
+					.siblings().removeClass("active");
+			});
+		});
+		// 获取接口
+		$.ajax({
+			type: "POST",
+			url: 'http://www.shangdll.com/personCenter/myInvitation',
+			data: JSON.stringify({
+				"openId": localStorage.getItem("myid")
+			}),
+			dataType: "json",
+			contentType: 'application/json; charset=UTF-8',
+			success: function (data) {
+				
+				var str = "<p>";
+				str += "<b>" + data.shareCode + "</b>";
+				str += "</p>";
+				$(".yaoqin").append(str);
+
+				var str = "<div>";
+				str += '<img src="' + data.headUrl + '" />';
+				str += "</div>";
+				$(".pic").append(str);
+
+				var str = "<b>";
+				str += "<b>" + data.friendCount + "</b>";
+				str += "</b>";
+				$(".goodfriend").append(str);
+
+				var str = "<b>";
+				str += "<b>" + data.totalProfit + "</b>";
+				str += "</b>";
+				$(".totalrevenue").append(str);
+
+				var str = "<b>";
+				str += "<b>" + data.invitationAward + "</b>";
+				str += "</b>";
+				$(".schemes").append(str);
+				
+				
+                console.log(data,'打印出数据列表')	
+				// 渲染我邀请的好友列表       
+				var str = "<div class='con_ul'>";
+				$.each(data.memberInfoList, function (idx, val) {
+					console.log(val, '000')
+					var valiD = val.openId;
+					console.log(valiD, ';;;;')
+					localStorage.setItem('valiD', valiD)|| []
+					str += "<div class=\"sec_li\"><a href='details.html?booksId=" + valiD +
+						"' class='lp_li_a'>  <div class='big'><div class='bigone'><div class='lp_li_imgWrap'><img src='" +
+						val.headUrl + "'class='pict'/></div><div class='xiao'><div class='lp_li_name'>" +
+						val.userName + "</div><img src='./img/yi.png' class='yi'></div></div><div></div><img src='./img/kai.png' class='kai'></div></a><div>";
+				});
+				str += "</div>";
+				$('.try').append(str);
+			},
+			error: function () {
+				console.log("错误")
+			}
+		});
+
+		// 获取排行榜接口
+		$.ajax({
+			type: "POST",
+			url: 'https://www.shangdll.com/personCenter/rankingList',
+			dataType: "json",
+			 contentType: 'application/json; charset=UTF- 8',
+			success: function (data) {
+//				console.log(data)
+				var arr = data;
+				for (let i = 0; i < arr.length; i++) {
+					$('.mun').append(
+						`<div class='munn'>
+                         <div><img src='${arr[i].headUrl}' class='pict'/></div>
+                         <div class='munn2'> 
+                         <div> <b> ${arr[i].username}</b> </div>
+                         <div> ${"累计投注次数："+arr[i].investNo} ${"投注金额："+arr[i].bettingMoney}</div>
+                         <div>  ${"奖金："+arr[i].gameGold}</div>
+                         </div>
+                         </div>`
+					);
+				}
+			},
+			error: function () {
+				console.log("错误")
+			}
+		});
+
+		//去掉url后面携带的参数
+		var url = window.location.href;
+		// console.log(url, 'ppppp')
+		var valiable = url.split("?")[0];
+		var json = {
+			time: new Date().getTime()
+		};
+		window.history.replaceState(json, "", valiable);
+	</script>
+</body>
+
+</html>

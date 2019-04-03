@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>领取金币</title>
+</head>
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	body {
+		background: url(./img/bj.png) top center no-repeat;
+		background-size: cover;
+	}
+
+	.gold {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	h3 {
+		margin-top: 200px;
+		color: #fff;
+		;
+	}
+
+	input {
+		width: 70%;
+		height: 2.5rem;
+		margin-top: 30px;
+		border-radius: 20rem;
+		border: none;
+		text-align: center;
+
+	}
+
+	button {
+		width: 80%;
+		height: 40px;
+		border: none;
+		background: orange;
+		color: white;
+		margin-top: 100px;
+		border-radius: 5px;
+	}
+</style>
+<script src="js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+
+<body>
+	<div class="gold">
+		<h3>请输入好友的邀请码:</h3>
+		<input type="text" value="" maxlength="8" onkeyup="this.value=this.value.replace(/\D/g,'')" />
+		<button class="btn_gold">赠送金币</button>
+	</div>
+</body>
+<!-- <script src="js/utils.js" type="text/javascript" charset="utf-8"></script> -->
+<script type="text/javascript">
+	$(function () {
+		var code = 123456;
+		var gold = 5;
+		var data = {
+			"openId": localStorage.getItem("myid"),
+			"shareCode": code,
+			"gameGold": gold
+		}
+		$.ajax({
+			type: "POST",
+			url: "http://www.shangdll.com/personCenter/sendGameGold",
+			data: JSON.stringify(data),
+			dataType: "json",
+			contentType: 'application/json; charset=UTF-8',
+			success: function (data) {
+				console.log(data, '赠送金币')
+
+			}
+		});
+	})
+	
+
+	$('.btn_gold').click(function () {
+	// input不能为空
+
+			if ($("input").val() == "") {
+				alert("请输入邀请码")
+			} else{
+
+			}
+
+	
+		$.ajax({
+			type: "POST",
+			url: "http://www.shangdll.com/personCenter/sendGameGold",
+			async: true,
+			data: JSON.stringify({
+				"openId": "NYRjRfR0GQqCapo0",
+				"shareCode": 123456,
+				"gameGold": 5
+
+			}),
+			dataType: "json",
+			contentType: 'application/json; charset=UTF-8',
+			success: function (data) {
+				console.log(data)
+				var arr = data;
+				alert(data.message)
+				// for (let i = 0; i < arr.length; i++) {
+				//     $('ul').append(
+				//         ` `
+				//     );
+				// }
+			}
+		});
+	})
+</script>
+
+</html>

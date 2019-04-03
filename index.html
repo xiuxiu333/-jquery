@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="css/mui.min.css" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mui/3.7.1/js/mui.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.6/vue.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0-beta.1/axios.min.js"></script>
+	<script src="js/common.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
+	<title></title>
+</head>
+<style>
+	body,ui,li,p,h1,h2,h3,h4,h5{
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		text-decoration: none;
+	}
+	body{
+		background-color: #131931;
+	}
+	.box{
+		/*background-color: #131931;*/
+		width: 100%;
+		height: 100%;
+	}
+	.solganBox{
+		margin-top: 220px;
+		height: auto;
+		text-align: center;
+	}
+	.solgan{
+		position: relative;
+		display: inline-block;//行元素适应文本长度
+    	
+	}
+	.solgan span{
+		font-size: 28px;
+        -webkit-background-clip: text;
+        color: transparent;
+	}
+	.solgan span:first-child{
+		background-image: linear-gradient(to right, #FFF298, #c890f3);
+	}
+	.dreamFont{
+		background-image: linear-gradient(to right, #c890f3, #FFF298);
+	}
+	.solgan img{
+		position: absolute;
+	    left: -28px;
+    	top: -20px;
+		z-index: -1;
+	}
+	.loginBox{
+		text-align: center;
+		margin-top: 60px;
+	}
+
+</style>
+<body>
+	<div id="app">
+		<div class="solganBox">
+		<div class="solgan">
+			<span>Diamond</span><span class="dreamFont">Dream</span>
+			<img src="./img/loginIcon.png" alt="">
+		</div>
+	</div>
+	<div class="loginBox">
+		<img src="./img/singIn.png" @click="loginIn" alt="">
+	</div>
+	</div>
+	
+</body>
+<script type="text/jscript">
+	 var vm = new Vue({
+		el:"#app",
+		data:{
+			code:"",
+		},
+		mounted(){
+			
+		},
+		methods:{
+			loginIn(){debugger
+				window.location.href = "https://www.shangdll.com/getWeixinUser/wxLogin";
+			},
+		},
+		watch:{
+			
+		},
+	})
+</script>
+</html>

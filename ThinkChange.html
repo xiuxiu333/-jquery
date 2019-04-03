@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>推广二维码</title>
+
+</head>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+<script src="./js/ZeroClipboard.min.js"></script>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    body {
+        background: url(./img/all.png)  center no-repeat;
+        background-size: 100% 100%;
+    }
+
+    .myinvitation {
+        background: white;
+        width: 85%;
+        text-align: center;
+        margin: auto;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        padding: 1rem;
+        border-radius: 1rem;
+    }
+
+    .myinvitation_content {
+        width: 100%;
+        /* margin: 0 auto; */
+        text-align: center;
+    }
+
+    .myinvitation_content img {
+        width: 50%;
+        margin-top: 1rem;
+
+    }
+
+    .yard {
+        width: 50%;
+        height: 10rem;
+        margin: 0 auto;
+    }
+
+    .yard img {
+        width: 100%;
+        height: 10rem;
+        background: black;
+        margin: 0 auto;
+        margin-top: 1rem;
+    }
+
+    .download {
+        color: gray;
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    .remark {
+        width: 100%;
+        font-size: 0.5rem;
+        border: 1.5px solid rgba(236, 100, 52, 1);
+        border-radius: 1rem;
+        padding: 0.2rem;
+        color: rgba(236, 100, 52, 1);
+        box-sizing: border-box;
+        margin-top: 1rem;
+    }
+
+    .examine {
+        width: 100%;
+        height: 3.5rem;
+
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .condition {
+        width: 100%;
+        display: flex;
+        margin: 0 auto;
+        justify-content: space-around;
+    }
+
+    .condition div {
+        font-family: PingFang-SC-Medium;
+        font-weight: 500;
+        color: rgba(29, 98, 240, 1);
+        text-align: center;
+    }
+
+    .condition p {
+        font-family: PingFang-SC-Medium;
+        font-weight: 500;
+        color: rgba(29, 98, 240, 1);
+        opacity: 0.82;
+        font-size: 0.8rem
+    }
+
+    #xmid {
+        background: none;
+        border: none;
+        text-align: center;
+        font-size: 1.5rem;
+    }
+
+    .stealth {
+        width: 100%;
+        height: 45rem;
+        background: rgba(29, 99, 240, 0.027);
+    }
+</style>
+
+<body>
+    <div class="examine" style="margin-top: 3.5rem;">
+        <div></div>
+        <a name="pfg" href="#top" style="width: 25%;height: 2rem;">
+            <img src="./img/regulation.png" alt="" style="width: 100%;height: 2rem;">
+        </a>
+    </div>
+    </div>
+    <div class="myinvitation">
+        <div class="myinvitation_content">
+            <div>我的邀请码</div>
+             <!--<p class='mytxt'>000000</p>--> 
+            <div class='input_value' style="margin-top:0.6rem;">
+                <!--<input type="text" readonly="readonly" unselectable="on" value="" class='mytxt' id="xmid"
+                style=" ">-->
+            </div>
+            <div>
+                <img src="./img/copy.png" alt="" class="copyname">
+            </div>
+            <div class="yard"><img src="./img/ma.jpg" alt=""></div>
+            <div class="download">扫描二维码下载三点钟</div>
+            <div><img src="./img/orang.png" alt="" style=" width: 70%;margin-top: 1rem;height: 2.8rem;"></div>
+            <div class="remark">好友成功注册APP后可获得3金币+3蓝钻+3紫钻</div>
+        </div>
+    </div>
+    <div class="myinvitation" style="padding:0 0 3rem 0;width: 93%;margin-top:1.5rem;">
+        <div class="examine">
+            <div></div>
+            <img src="./img/examine.png" alt="" style=" width: 15%;height: 1.3rem;">
+        </div>
+        <div class="condition">
+            <div>
+                <h2 class="pepol"></h2>
+                <p>邀请总人数</p>
+            </div>
+            <div>
+                <h2 class="teday"></h2>
+                <p>今日邀请</p>
+            </div>
+        </div>
+
+    </div>
+
+    <a href="#bottom" name="top">
+        <div class="stealth"></div>
+    </a>
+    </div>
+
+    <!-- <script src="js/utils.js" type="text/javascript" charset="utf-8"></script> -->
+
+    <script type="text/javascript">
+        $.ajax({
+            type: "POST",
+            url: 'https://www.shangdll.com/personCenter/detailInfo',
+            data: JSON.stringify({
+                "openId":  window.localStorage.getItem("myid")||[]
+            }),
+            dataType: "json",
+            contentType: 'application/json; charset=UTF-8',
+            success: function (data) {
+                console.log(data,'oooooooooooooo')
+            }
+        });
+        $('.copyname').click(function () {
+            var dd = $('.mytxt');
+            dd[0].select();
+            document.execCommand("Copy");
+            alert("复制成功！")
+        });
+
+        // 获取二维码接口
+        $.ajax({
+            type: "POST",
+            url: 'https://www.shangdll.com/personCenter/queryShareCode',
+            data: JSON.stringify({
+                "openId":  window.localStorage.getItem("myid")
+            }),
+            dataType: "json",
+            async: false,
+            contentType: 'application/json; charset=UTF-8',
+            success: function (data) {
+                console.log(data)
+                var str = "<div>";
+                str += "<input class='mytxt' id='xmid' value='" + data.shareCode +
+                    "'readonly='readonly' unselectable='on'></input>";
+                str += "</div>";
+                $(".input_value").append(str);
+                var str = "<span>";
+                str += "<b>" + data.toDayPeople + "</b>";
+                str += "</span>";
+                $(".pepol").append(str);
+
+                var str = "<span>";
+                str += "<b>" + data.totalPeople + "</b>";
+                str += "</span>";
+                $(".teday").append(str);
+            },
+
+            error: function () {
+                console.log("错误")
+            }
+        });
+    </script>
+</body>
+
+</html>

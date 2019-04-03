@@ -1,0 +1,1342 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="css/mui.min.css" rel="stylesheet">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/mui/3.7.1/js/mui.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.6/vue.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0-beta.1/axios.min.js"></script>
+		<script src="js/common.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
+		<title></title>
+	</head>
+	<style>
+		body,
+		ul,
+		li,
+		p,
+		h1,
+		h2,
+		h3,
+		h4,
+		h5 {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			text-decoration: none;
+		}
+		
+		body {
+			background-color: #131931;
+			color: #AFAEAF;
+			height: 900px;
+		}
+		
+		[v-cloak] {
+			display: block !important;
+		}
+		
+		.topPart {
+			padding-left: 28px;
+			padding-right: 28px;
+		}
+		
+		.header div {
+			display: inline-block;
+		}
+		
+		.header {
+			margin-top: 35px;
+			margin-bottom: 10px;
+		}
+		
+		.header_syboml span {
+			font-size: 18px;
+			-webkit-background-clip: text;
+			color: transparent;
+		}
+		
+		.header_syboml span:first-child {
+			background-image: linear-gradient(to right, #FFF298, #c890f3);
+		}
+		
+		.header_syboml .dreamFont {
+			background-image: linear-gradient(to right, #c890f3, #FFF298);
+		}
+		
+		.functions {
+			border-radius: 81px;
+			width: 47px;
+			height: 22px;
+			text-align: center;
+			font-size: 14px;
+			color: #fff;
+			line-height: 22px;
+		}
+		
+		.cz {
+			background-color: #5DC875;
+		}
+		
+		.tx {
+			background-color: #209AD0;
+		}
+		
+		.getSome div {
+			display: inline-block;
+		}
+		
+		.money {
+			color: #70A0DD;
+		}
+		
+		.zuan {
+			color: #CEA6FE;
+		}
+		
+		.tzje {
+			margin-top: 10px;
+		}
+		
+		.tzje p {
+			font-size: 13px;
+		}
+		
+		.tzje input {
+			width: 50px;
+			outline: none;
+			border: none;
+			background: transparent;
+			color: #fff;
+		}
+		
+		.tzje>ul>li:first-child input,
+		.tzje>ul>li:first-child img {
+			padding: 0;
+			margin: 0;
+			float: left;
+		}
+		
+		.tzje>ul>li:first-child img {
+			margin-top: 10px;
+		}
+		
+		.tzje ul {
+			height: 38px;
+			margin-top: 5px;
+			background-color: #262B41;
+			line-height: 38px;
+		}
+		
+		.tzje ul li:first-child {
+			width: 35%;
+			background-color: #515567;
+			padding-left: 10px;
+		}
+		
+		.tzje ul li {
+			float: left;
+			width: 15%;
+			height: 100%;
+			text-align: center;
+		}
+		
+		.hdjj {
+			margin-top: 10px;
+		}
+		
+		.hdjj ul {
+			height: 38px;
+			margin-top: 5px;
+			background-color: #262B41;
+			line-height: 38px;
+		}
+		
+		.hdjj ul li:first-child {
+			text-align: left;
+			padding-left: 10px;
+			box-sizing: border-box;
+		}
+		
+		.hdjj ul li {
+			display: inline-block;
+			width: 32%;
+			text-align: center;
+		}
+		
+		.zjgl {
+			height: 148px;
+			width: 100%;
+			background-color: #262B41;
+			margin-top: 15px;
+			padding: 10px;
+			box-sizing: border-box;
+		}
+		
+		.zjgl>p {
+			text-align: center;
+		}
+		
+		.block_1 {
+			font-size: 12px;
+		}
+		
+		.block_2 {
+			font-size: 20px;
+			color: #fff;
+			font-family: "PingFang-SC-Heavy"
+		}
+		
+		.zjgl {
+			position: relative;
+		}
+		
+		.zjgl ul {
+			width: 100%;
+			margin-top: 15px;
+		}
+		
+		.zjgl ul li {
+			width: 50%;
+			float: left;
+			text-align: center;
+		}
+		
+		.pl {
+			font-size: 12px;
+		}
+		
+		.shuzi {
+			font-size: 23px;
+			color: #fff;
+			font-family: "PingFang-SC-Heavy";
+			margin-top: 5px;
+		}
+		
+		.followme {
+			position: absolute;
+			bottom: -14px;
+			left: 34%;
+		}
+		
+		.rangBox {
+			margin-top: 30px;
+		}
+		
+		.topS {
+			width: 62px;
+			height: 34px;
+			margin: 0 auto;
+			text-align: center;
+			line-height: 30px;
+			background-image: url("./img/getScore.png");
+		}
+		
+		.mui-input-range .mui-tooltip {
+			background-color: transparent!important;
+			opacity: 1!important;
+			border: none!important;
+			border-radius: 0px!important;
+			font-size: 17px !important;
+			line-height: 34px !important;
+			position: absolute !important;
+			z-index: 1 !important;
+			top: -34px !important;
+			width: 62px !important;
+			height: 34px !important;
+			text-align: center !important;
+			color: rgb(160, 160, 160) !important;
+			background-image: url(./img/getScore.png) !important;
+			text-shadow: 0 1px 0 transparent!important;
+		}
+		
+		.mui-hidden {
+			display: block!important;
+		}
+		
+		.rang {
+			height: 50px;
+			margin-bottom: 20px;
+		}
+		
+		.mui-input-range {
+			padding: 0!important;
+			position: relative;
+		}
+		
+		.mui-input-range ul {
+			position: absolute;
+			width: 100%;
+			height: auto;
+			left: 0;
+			display: flex;
+			flex-direction: row;
+			flex-wrap: nowrap;
+			bottom: -12px;
+			justify-content: space-between;
+		}
+		
+		.mui-input-range ul>li {
+			font-size: 12px;
+		}
+		
+		.circle {
+			position: absolute;
+			width: 26px;
+			height: 26px;
+			background-color: #4dd08b;
+			border-radius: 50%;
+			top: -20px;
+			left: 0;
+			display: none;
+		}
+		/* 滑块样式 */
+		
+		.mui-input-range input[type=range]:nth-of-type(2) {
+			position: relative;
+			width: 100%;
+			height: 16px;
+			margin: 17px 0;
+			padding: 0;
+			cursor: pointer;
+			border: 0;
+			border-radius: 3px;
+			outline: 0;
+			background-color: #999;
+			-webkit-appearance: none!important;
+			background: -webkit-linear-gradient(#B800A4, #B800A4) no-repeat, #32B16C;
+			background-size: 50% 100%;
+		}
+		
+		.mui-input-range input[type=range]:nth-of-type(1) {
+			background: -webkit-linear-gradient(transparent, transparent) no-repeat, transparent;
+			background-size: 0 100%;
+			position: absolute;
+			top: -20px;
+			z-index: 99;
+		}
+		
+		.mui-input-range input[type=range]:nth-of-type(2)::-webkit-slider-thumb {
+			background: #fff;
+			/*拖动块背景*/
+			border-radius: 50%;
+			/*外观设置为圆形*/
+			border: solid 2px #D2D2D2;
+			/*设置边框*/
+		}
+		
+		.isAutoPlay {
+			margin-bottom: 20px;
+			padding-left: 25px;
+			text-align: center;
+		}
+		
+		.isAutoPlay>div {
+			height: auto;
+			overflow: hidden;
+			display: inline-block;
+		}
+		
+		.isAutoPlay>div>span {
+			text-align: center;
+		}
+		
+		.middlelI {
+			/* background-image: url("./img/OFF.png"); */
+			/* width: 95px;
+	height: 37px; */
+			display: block;
+			float: left;
+			margin-right: 10px;
+		}
+		
+		.fontDes {
+			width: 22%;
+		}
+		
+		.fontDes span {
+			font-size: 12px;
+			color: #fff;
+		}
+		
+		.closes {
+			font-size: 12px;
+			float: left;
+			margin-right: 10px;
+			margin-top: 5px;
+		}
+		
+		.ques {
+			width: 24px;
+			height: 24px;
+			background-color: #42475A;
+			border-radius: 50%;
+			text-align: center;
+			line-height: 24px;
+			float: left;
+			margin-top: 5px;
+		}
+		
+		.quesb1 {
+			width: 18%
+		}
+		
+		.quesb {
+			width: 10%
+		}
+		
+		.autoGo {
+			font-size: 12px;
+			float: left;
+			margin-right: 10px;
+			margin-top: 5px;
+		}
+		
+		.toPlay {
+			width: 95px;
+			height: 41px;
+			border-radius: 20px;
+			background-color: #8200B8;
+			text-align: center;
+			line-height: 41px;
+			color: #fff;
+			margin: 0 auto;
+			margin-bottom: 20px;
+		}
+		
+		.yaoqing {
+			margin-bottom: 15px;
+		}
+		
+		.yaoqing>div {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: nowrap;
+			justify-content: space-around;
+		}
+		
+		.yaoqingx {
+			width: 52px;
+			height: 52px;
+			margin-right: 2%;
+			background: url(./img/yaoqing.png) no-repeat;
+			margin-top: 5px;
+		}
+		
+		.yaoqing .ques {
+			margin-top: 18px;
+		}
+		
+		.contens {
+			font-size: 12px;
+			margin-right: 2%;
+		}
+		
+		.contens span {
+			display: block;
+		}
+		
+		.listTip {
+			height: 37px;
+			width: 100%;
+			background-color: #42475A;
+		}
+		
+		.listTip li {
+			width: 100%;
+			/*width: 50%;*/
+			height: 100%;
+			float: left;
+			color: #fff;
+			text-align: center;
+			line-height: 37px;
+			font-size: 14px;
+		}
+		/*.listTip li:first-child{
+	border-bottom: 2px solid #fff;
+}*/
+		
+		.tablesx {
+			width: 100%;
+			height: 20px;
+			margin-top: 10px;
+		}
+		
+		.tablesx li {
+			width: 20%;
+			float: left;
+			font-size: 13px;
+			text-align: center;
+			line-height: 20px;
+		}
+		
+		.forList {
+			width: 100%;
+			height: 200px;
+			overflow: auto;
+			margin-top: 10px;
+			color: #fff;
+		}
+		/*滚动条样式*/
+		
+		.forList::-webkit-scrollbar {
+			/*滚动条整体样式*/
+			width: 8px;
+			/*高宽分别对应横竖滚动条的尺寸*/
+			height: 80px;
+		}
+		
+		.forList::-webkit-scrollbar-thumb {
+			/*滚动条里面小方块*/
+			border-radius: 6px;
+			background: #736d6d;
+		}
+		
+		.forList::-webkit-scrollbar-track {
+			/*滚动条里面轨道*/
+			border-radius: 0;
+			background: rgba(0, 0, 0, .15);
+		}
+		
+		.tablesx_t {
+			width: 100%;
+			height: 40px;
+		}
+		
+		.tablesx_t li {
+			width: 20%;
+			float: left;
+			font-size: 13px;
+			text-align: center;
+			line-height: 40px;
+		}
+		/* .flex-container .flex-item {
+            width: 320px;
+            height: 240px;
+            margin: 10px;
+            background-color:lightsalmon;
+        } */
+		
+		.mui-popover {
+			height: 250px;
+			position: fixed;
+		}
+		
+		.mui-popover-arrow {
+			display: none;
+		}
+		
+		.mui-scroll-wrapper {
+			padding-left: 10px;
+			padding-right: 10px;
+			text-align: center;
+		}
+		
+		.mui-scroll-wrapper ul {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			justify-content: space-around;
+		}
+		
+		.chongZ>div {
+			font-size: 13px;
+			color: #FBB728;
+			display: inline-block;
+			height: auto;
+			overflow: hidden;
+		}
+		
+		.mui-scroll-wrapper>div img {
+			float: left;
+		}
+		
+		.yaoq .ww {
+			display: inline-block;
+			height: auto;
+			overflow: hidden;
+			color: #FBB728;
+		}
+		
+		.mui-scroll-wrapper>p:first-child {
+			text-align: center;
+			font-size: 16px;
+			color: #262B41;
+			margin: 10px 0 10px 0;
+		}
+		
+		.mui-scroll-wrapper .coin {
+			width: 30%;
+			height: 67px;
+			border: 1px solid #FBB728;
+			border-radius: 5px;
+			margin-bottom: 10px;
+			padding-top: 13px;
+		}
+		
+		.coin>p {
+			font-size: 12px;
+			color: #42475A;
+			text-align: center;
+			padding-top: 8px;
+		}
+		
+		.coin>p:first-child {
+			font-size: 15px;
+			color: #FBB728;
+			padding-top: 0;
+		}
+		
+		.yaoq>p:first-child {
+			color: #FBB728;
+			font-size: 16px;
+			;
+		}
+		
+		.yaoq>p:nth-of-type(2) {
+			margin-bottom: 10px;
+		}
+		
+		.ww img,
+		.ww span {
+			float: left;
+		}
+		
+		.ww span {
+			font-size: 18px;
+		}
+		
+		.yaoq p,
+		.yaoq span {
+			color: #42475A;
+		}
+		
+		.desBox {
+			text-align: center;
+		}
+		
+		.des {
+			display: inline-block;
+			width: 80%;
+		}
+		
+		.thirds {
+			width: 80%;
+			display: flex;
+			flex-direction: row;
+			flex-wrap: nowrap;
+			justify-content: space-around;
+			display: inline-flex;
+		}
+		
+		.thirds>div {
+			height: 52px;
+			width: 52px;
+			float: left;
+			background-image: url("./img/fir.png");
+		}
+		
+		.thirds>div:first-child {
+			background-image: url("./img/wx.png");
+		}
+		
+		.topPopover,
+		.topPopoverq,
+		#topPopoverss,
+		#topPopoversY {
+			display: none;
+		}
+		
+		.chongStyle {
+			opacity: 1;
+			top: 0;
+			bottom: 0;
+			right: 0;
+			left: 0;
+			margin: 100px auto;
+			display: block!important;
+		}
+		
+		.chongW {
+			padding: 16px;
+			text-align: left;
+			height: auto!important;
+		}
+		
+		.chongW p {
+			color: #fff;
+			font-size: 13px;
+		}
+		
+		#topPopoverss {
+			height: 400px;
+		}
+		/*超出省略*/
+		
+		.ccsl {
+			width: 99%;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+		
+		.solgan {
+			position: relative;
+			display: inline-block; //行元素适应文本长度
+		}
+		
+		.solgan img {
+			position: absolute;
+			left: -28px;
+			top: -20px;
+			z-index: -1;
+		}
+	</style>
+
+	<body v-cloak>
+		<div id="app">
+			<div class="topPart" v-cloak>
+				<div class="header">
+					<div class="header_syboml">
+						<span>Diamond</span><span class="dreamFont">Dream</span>
+						<!--					<img src="./img/loginIcon.png" alt="">-->
+					</div>
+					<div class="functions cz">
+						<a href="#" @click="chongzhi(1)" style="color: #fff;text-decoration: none;">充值</a>
+					</div>
+					<!--<div class="functions tx">提现</div>-->
+				</div>
+				<div class="getSome">
+					<div>
+						<img src="./img/money.png" alt="">
+						<span id="money" class="money">{{resultObj.gameGold}}</span>
+					</div>
+					<div>
+						<img src="./img/zuan.png" alt="">
+						<span class="zuan">{{resultObj.surplusDiamond}}</span>
+					</div>
+				</div>
+				<div class="tzje">
+					<p>投注金额</p>
+					<ul>
+						<li>
+							<img src="./img/money.png" alt="">
+							<input type="text" v-model="input">
+						</li>
+						<li>金币</li>
+						<li @click="beish(1)">1/2</li>
+						<li @click="beish(2)">2X</li>
+						<li @click="beish(3)">MAX</li>
+					</ul>
+				</div>
+
+				<div class="hdjj">
+					<p>获得奖金</p>
+					<ul>
+						<li>
+							<img src="./img/money.png" alt="">
+						</li>
+						<li>{{getGold}}</li>
+						<li>金币</li>
+					</ul>
+				</div>
+				<div class="zjgl">
+					<p class="block_1">小于该数获胜</p>
+					<p class="block_2">{{wins}}</p>
+					<ul>
+						<li>
+							<p class="pl">赔率</p>
+							<p class="shuzi">{{failsT}}X</p>
+						</li>
+						<li>
+							<p class="pl">中奖概率</p>
+							<p class="shuzi">{{winRate}}%</p>
+						</li>
+					</ul>
+					<div class="followme">
+						<a href="#" @click="chongzhi(2)">
+							<img src="./img/followme.png" alt="">
+						</a>
+
+					</div>
+				</div>
+				<div class="rangBox">
+					<div class="topS" style="opacity:0">50</div>
+					<div class="rang">
+						<div id="mui-input-range" class="mui-input-row mui-input-range">
+							<input type="range" id='block-range-circle' disabled="true" v-show="circleFlag" value="0" @change="changRang" v-model="rangF" min="2" max="99">
+							<input type="range" id='block-range' value="50" @change="changRang" v-model="rangC" min="2" max="99">
+							<span class="mui-tooltip">50</span>
+							<ul>
+								<li>1</li>
+								<li>25</li>
+								<li>50</li>
+								<li>75</li>
+								<li>100</li>
+							</ul>
+						</div>
+					</div>
+
+				</div>
+				<div class="isAutoPlay">
+					<div>
+						<span class="autoGo">自动下注</span>
+						<div id="mySwitch" @click="autoToPlay" class="middlelI mui-switch mui-switch-blue">
+							<div class="mui-switch-handle"></div>
+						</div>
+						<!-- 蓝色开关关闭状态 -->
+						<span class="closes">关闭</span>
+						<span class="ques" @click="chongzhi(3)">?</span>
+					</div>
+				</div>
+				<div class="toPlay" @click="toPlay">
+					{{desPlay}}
+				</div>
+				<div class="yaoqing">
+					<div>
+						<span class="yaoqingx"></span>
+						<span class="contens">
+						<span>
+							本次下注可获得0.001蓝钻
+						</span>
+						<span>
+							现在投注1金币可获得0.001蓝钻
+						</span>
+						<span>
+							现在投注1金币可获得0.001蓝钻
+						</span>
+						</span>
+						<span @click="chongzhi(4)" class="ques">?</span>
+					</div>
+				</div>
+			</div>
+			<ul class="listTip">
+				<!--<li>所有投注</li>-->
+				<li>我的投注</li>
+			</ul>
+			<ul class="tablesx">
+				<li>时间</li>
+				<li>投注者</li>
+				<li>投注号码</li>
+				<li>奖金</li>
+				<li>产钻</li>
+			</ul>
+			<div class="forList">
+				<ul class="tablesx_t" v-for="(item,index) in resultObj.investmentList" :style="{background:index%2==0?'#D4CD69':'#3D275A'}">
+					<li>{{item.bettingDate}}</li>
+					<li>
+						<div class="ccsl">{{item.username}}</div>
+					</li>
+					<li>{{item.investNo}}</li>
+					<li>{{item.gameGold}}</li>
+					<li>{{item.surplusDiamond}}</li>
+				</ul>
+			</div>
+
+			<!--邀请弹出菜单-->
+			<div id="topPopoverq" :class="{'chongStyle':chongzhiBox2}" class="mui-popover">
+				<div class="mui-scroll-wrapper yaoq">
+					<p>邀请有奖<span @click="closeD(2)" style="float: right;">X</span></p>
+					<p>每成功邀请一位新用户您将获得</p>
+					<div class="ww">
+						<span>
+						2
+					</span>
+						<img src="./img/money.png" alt="" />
+
+					</div>
+					<p class="desBox">
+						<span class="des">好友成功注册APP并领取完新人 红包后奖励将自动发放至您钱包 账户</span>
+					</p>
+					<p style="color: #5DC875;">注：请点击右上角使用微信分享</p>
+					<!--<div class="thirds">
+						<div></div>
+						<div></div>
+					</div>-->
+				</div>
+
+			</div>
+			<!--充值弹出菜单-->
+			<div id="topPopover" :class="{'chongStyle':chongzhiBox1}" class="mui-popover">
+				<div class="mui-scroll-wrapper chongZ">
+					<p>请选择充值金额<span @click="closeD(1)" style="float: right;">X</span></p>
+					<ul>
+						<li class="coin" @click="czMethods(50000)">
+							<p>50000金币</p>
+							<p>=50000原石</p>
+						</li>
+						<li class="coin" @click="czMethods(10000)">
+							<p>10000金币</p>
+							<p>=10000原石</p>
+						</li>
+						<li class="coin" @click="czMethods(5000)">
+							<p>5000金币</p>
+							<p>=5000原石</p>
+						</li>
+						<li class="coin" @click="czMethods(1000)">
+							<p>1000金币</p>
+							<p>=1000原石</p>
+						</li>
+						<li class="coin" @click="czMethods(500)">
+							<p>500金币</p>
+							<p>=500原石</p>
+						</li>
+						<li class="coin" @click="czMethods(100)">
+							<p>100金币</p>
+							<p>=100原石</p>
+						</li>
+					</ul>
+					<div>
+						<img src="./img/money.png" alt="" /><span>金币余额：{{resultObj.gameGold}}</span>
+					</div>
+				</div>
+			</div>
+			<!--玩法介绍-->
+			<div id="topPopoverss" style="background-color: #2c1150;" :class="{'chongStyle':chongzhiBox4}" class="mui-popover">
+				<div class="mui-scroll-wrapper chongW">
+					<p style="color: #fff;">玩法介绍<span @click="closeD(4)" style="float: right;">X</span></p>
+					<p>1.设置投注的金币金额</p>
+					<p>2.调整滑条投注骰子号码投注上限，不同的号码有不同的胜出几率。</p>
+					<p>3.按下“掷骰子”按钮进行投注。</p>
+					<p>4.如果摇到的骰子号码小于投注号码，立即中奖。赢取的奖金数量=下注金额*赔率</p>
+					<p>5.每投注1金币，将根据当前的挖矿产钻难度获得一定数量的蓝钻。</p>
+					<p>6.蓝钻将采用收入挖矿，在游戏过程中平台将 根据用户消费流水*手续费率*当前产钻难度来挖矿产生蓝钻。（例 如:当前蓝钻的挖矿的难度为2.5，手续费为1.5%，则用户 每产生1原石消费流水可挖矿产出0.0375蓝钻）
+					</p>
+				</div>
+			</div>
+			<!--自动下注-->
+			<div id="topPopoversY" style="height:180px;background-color: #2c1150;" :class="{'chongStyle':chongzhiBox3}" class="mui-popover">
+				<div class="mui-scroll-wrapper chongW">
+					<p style="color: #fff;">自动投注说明<span @click="closeD(3)" style="float: right;">X</span></p>
+					<p>开启自动投注后，将会按当前投注设定自动投注直至取消，取消会有一两秒延迟，敬请留意</p>
+				</div>
+			</div>
+			<!--邀请码-->
+			<div id="topPopoversY" style="height:180px;background-color: #2c1150;" :class="{'chongStyle':chongzhiBox6}" class="mui-popover">
+				<div class="mui-scroll-wrapper">
+					<input type="text" value="请输入邀请码" />
+				</div>
+			</div>
+
+		</div>
+	</body>
+	<script type="text/jscript">
+		var vm = new Vue({
+			el: "#app",
+			data: {
+				commoUrl: url,
+				resultObj: {},
+				input: "1",
+				getGold: "0",
+				wins: "",
+				rangC: "50",
+				rangF: "0",
+				winRate: "49",
+				failsT: "",
+				firRang: true,
+				chongzhiBox1: false,
+				chongzhiBox2: false,
+				chongzhiBox3: false,
+				chongzhiBox4: false,
+				chongzhiBox5: false,
+				chongzhiBox6: false,
+				throwCount: 0,
+				time: 0,
+				left: "",
+				timer: null,
+				timerAuto: null,
+				zfUrl: "",
+				playResultObj: {
+					betCount: "",
+					reward: "",
+					throwCount: "",
+					betsNo: "",
+				},
+				circleFlag: false,
+				desPlay: "掷骰子",
+				code: "",
+				username: "",
+				openId: "",
+				flagV: "",
+			},
+			mounted() {
+				var _this = this;
+				<!--$(".mui-input-range input[type=range]:nth-of-type(2)::-webkit-slider-thumb").html("20")-->
+				_this.code = GetQueryString("code");
+				_this.openId = GetQueryString("openId");
+				_this.flagV = Number(GetQueryString("flag"));
+				var params = getUrlVars();
+				_this.username = decodeURI(params.username);
+				_this.wins = _this.rangC;
+				_this.failsT = parseFloat((98.5 / (Number(_this.rangC) - 1)).toFixed(4));
+				_this.getGold = parseFloat(Number(_this.input) * Number(_this.failsT).toFixed(4));
+				$(".mui-tooltip").attr("style", "left:40%")
+				//mui初始化
+				mui.init({
+					swipeBack: true //启用右滑关闭功能
+				});
+
+				if(_this.flagV === 1) {
+					//var btnArray = ['跳过', '确定'];
+					var btnArray = ['确定'];
+					mui.prompt('请输入邀请码：', '邀请码', '提示', btnArray, function(e) {
+						if(e.index == 0) {
+							if(!$(".mui-popup-input input").val()) {
+								mui.toast("请先输入邀请码");
+								return false;
+							}
+							_this.registerss();
+						}
+					})
+				} else {
+					_this.getData();
+				}
+			},
+			methods: {
+				registerss() {
+					var vm = this;
+					var param = {
+						"username": vm.username,
+						"openId": vm.openId,
+						"shareCode": $(".mui-popup-input input").val(),
+					};
+					$.ajax({
+						url: vm.commoUrl + "/punters/registeredUsers.do",
+						type: "POST",
+						contentType: 'application/json',
+						data: JSON.stringify(param),
+						dataType: "json",
+						success: function(data) {
+							console.log(data);
+							if(data.success) {
+								mui.toast(data.message);
+								vm.getData();
+							} else {
+								mui.toast(data.message);
+								var btnArray = ['确定'];
+								mui.prompt('请输入邀请码：', '邀请码', '提示', btnArray, function(e) {
+									if(e.index == 0) {
+										if(!$(".mui-popup-input input").val()) {
+											mui.toast("请先输入邀请码");
+											return false;
+										}
+										vm.registerss();
+									}
+								})
+							}
+						}
+					});
+				},
+				changRang() {
+					<!--vm.rangNo = $(".mui-input-range input[type=range]").next().html()+'%';-->
+				},
+				czMethods(val) {
+					var vm = this;
+					if(val < 100) {
+						mui.alert('最少充值100金币', '提示');
+						return;
+					}
+					var param = {
+						"username": vm.username,
+						"openId": vm.openId,
+					};
+					var flag0 = true;
+					$.ajax({
+						url: vm.commoUrl + "/account/judgeCurrentAccount.do",
+						type: "POST",
+						contentType: 'application/json',
+						data: JSON.stringify(param),
+						dataType: "json",
+						success: function(data) {
+							console.log(data);
+							flag0 = false;
+							if(!flag0) {
+								if(!data.success && data.message === "当前用户已注册") { //已注册 并已绑定 直接调登录
+									vm.getLogin(param, val);
+								} else {
+									vm.register(param, val);
+								}
+
+							}
+						}
+					});
+				},
+				register(param, val) {
+					var vm = this;
+					var flag = true;
+					$.ajax({
+						url: vm.commoUrl + "/account/register.do",
+						type: "POST",
+						contentType: 'application/json',
+						data: JSON.stringify(param),
+						dataType: "json",
+						success: function(data) {
+							console.log(data);
+							flag = false;
+							if(!flag) {
+								vm.getUrl(param, val);
+							}
+						}
+					});
+				},
+				getUrl(param, val) {
+					var vm = this;
+					var flag2 = true;
+					$.ajax({
+						url: vm.commoUrl + "/account/getRechargeAddress.do",
+						type: "POST",
+						contentType: 'application/json',
+						data: JSON.stringify(param),
+						dataType: "json",
+						success: function(data) {
+							console.log(data);
+							flag2 = false;
+							if(!flag2) {
+								vm.getLogin(param, val);
+							}
+						}
+					});
+				},
+				getLogin(param, val) {
+					var vm = this;
+					param["amount"] = String(val);
+					$.ajax({
+						url: vm.commoUrl + "/account/rechargeLogin.do",
+						type: "POST",
+						contentType: 'application/json',
+						data: JSON.stringify(param),
+						dataType: "json",
+						success: function(data) {
+							console.log(data);
+							vm.zfUrl = data.url + '/' + data.token;
+							vm.chongzhiBox1 = false;
+							var btnArray = ['否', '是'];
+							mui.confirm('是否确认充值？', '提示', btnArray, function(e) {
+								if(e.index == 1) {
+									window.open(vm.zfUrl);
+									vm.chongzhiBox1 = false;
+								}
+							})
+						}
+					});
+				},
+				chongzhi(val) {
+					var vm = this;
+					if(val == 1) {
+						vm.chongzhiBox1 = true;
+					} else if(val == 2) {
+						vm.chongzhiBox2 = true;
+					} else if(val == 3) {
+						vm.chongzhiBox3 = true;
+					} else if(val == 4) {
+						vm.chongzhiBox4 = true;
+					}
+
+				},
+				closeD(val) {
+					var vm = this;
+					if(val == 1) {
+						vm.chongzhiBox1 = false;
+					} else if(val == 2) {
+						vm.chongzhiBox2 = false;
+					} else if(val == 3) {
+						vm.chongzhiBox3 = false;
+					} else if(val == 4) {
+						vm.chongzhiBox4 = false;
+					}
+				},
+				beish(val) {
+					var vm = this;
+					if(val == 1) {
+						vm.input = Number(vm.input) / 2;
+					} else if(val == 2) {
+						vm.input = Number(vm.input) * 2;
+					} else {
+						//vm.input = 100;
+					}
+					vm.limitInputVal();
+				},
+				limitInputVal() {
+					var vm = this;
+					//if(Number(vm.input) > 100) {
+					//	mui.alert('最大投注是100', '提示');
+					//	vm.input = 100;
+					//}
+					if(Number(vm.input) <= 1) {
+						mui.alert('最小投注是1', '提示');
+						vm.input = 1;
+					}
+				},
+				autoToPlay() {
+					var vm = this;
+					if(vm.desPlay == "自动投注中") {
+						vm.desPlay = "掷骰子";
+						clearInterval(vm.timerAuto);
+						vm.circleFlag = false;
+					}
+				},
+				toPlay() {
+					var vm = this;
+					if(!vm.input || Number(vm.input) <= 0) {
+						mui.alert('请输入大于0的投注金额', '提示');
+						return;
+					};
+					//if(Number(vm.input) > 100) {
+					//	mui.alert('最大投注是100', '提示');
+					//	vm.input = 100;
+					//};
+					if(Number(vm.input) > Number($("#money").html())) {
+						mui.alert('剩余金币数不足', '提示');
+						return;
+					}
+					if(vm.desPlay === '自动投注中') {
+						return;
+					}
+					var isActive = document.getElementById("mySwitch").classList.contains("mui-active");
+					if(isActive) {
+						vm.desPlay = "自动投注中";
+						vm.touzhu();
+						vm.timerAuto = setInterval(function() {
+							vm.touzhu();
+						}, 6000);
+					} else {
+						vm.touzhu();
+					}
+				},
+				touzhu() {
+					var vm = this;
+					if(vm.circleFlag) {
+						return;
+					}
+					var param = {
+						"username": vm.username,
+						"openId": vm.openId,
+						"gameGold": vm.input,
+						"randomNo": vm.rangC,
+						"reward": vm.getGold
+					}
+					$.ajax({
+						url: vm.commoUrl + "/punters/rollDice.do",
+						type: "POST",
+						contentType: 'application/json',
+						data: JSON.stringify(param),
+						dataType: "json",
+						success: function(data) {
+							console.log(data);
+							vm.getData();
+							if(data["false"] == "账户余额不足，请充值") {
+								//mui.alert('账户余额不足，请充值', '提示');
+								mui.toast("账户余额不足，请充值");
+								//vm.input = 100;
+								return;
+							};
+							vm.circleFlag = true;
+							vm.timer = setInterval(function() {
+								vm.rangF++;
+							}, 10);
+							vm.playResultObj = data;
+
+						}
+					});
+				},
+				getData() {
+					var vm = this;
+					//vm.resultObj.investmentList = [{gameGold:"ppppoi",investNo:"sss",bettingDate:"sjfsss",username:"dsajfkjsdfsajfasfsfsafs"},
+					//{gameGold:"ppppoi",investNo:"sss",bettingDate:"sjfsss",username:"dsajfkjsdfsajfasfsfsafs"},
+					//{gameGold:"ppppoi",investNo:"sss",bettingDate:"sjfsss",username:"dsajfkjsdfsajfasfsfsafs"},
+					//{gameGold:"ppppoi",investNo:"sss",bettingDate:"sjfsss",username:"dsajfkjsdfsajfasfsfsafs"},
+					//{gameGold:"ppppoi",investNo:"sss",bettingDate:"sjfsss",username:"dsajfkjsdfsajfasfsfsafs"},
+					//{gameGold:"ppppoi",investNo:"sss",bettingDate:"sjfsss",username:"dsajfkjsdfsajfasfsfsafs"},]
+
+					var param = {
+						"username": vm.username,
+						"openId": vm.openId,
+					}
+					$.ajax({
+						url: vm.commoUrl + "/punters/getHomePage.do",
+						type: "POST",
+						contentType: 'application/json',
+						data: JSON.stringify(param),
+						dataType: "json",
+						success: function(data) {
+							vm.resultObj = data;
+							vm.resultObj.gameGold = parseFloat(vm.resultObj.gameGold.toFixed(4));
+							vm.resultObj.surplusDiamond = parseFloat(vm.resultObj.surplusDiamond.toFixed(4));
+							if(vm.resultObj.investmentList && vm.resultObj.investmentList.length != 0) {
+								for(var i = 0; i < vm.resultObj.investmentList.length; i++) {
+									var obj = vm.resultObj.investmentList[i];
+									if(obj.bettingDate) {
+										obj.bettingDate = moment(obj.bettingDate).format('YYYY-MM-DD')
+									}
+									if(obj.surplusDiamond){
+										obj.surplusDiamond = parseFloat(obj.surplusDiamond.toFixed(4));
+									}
+								}
+							}
+							//请求成功后去除地址栏后的参数
+							var url = window.location.href;
+							var valiable = url.split("?")[0];
+							var json = {
+								time: new Date().getTime()
+							};
+							window.history.replaceState(json, "", valiable);
+						}
+					});
+				}
+			},
+			watch: {
+				input(newVal, oldVal) {
+					vm.getGold = parseFloat((Number(vm.input) * Number(vm.failsT)).toFixed(4));
+					//if(Number(newVal) > 100) {
+					//	mui.alert('最大投注是100', '提示');
+					//	vm.input = 100;
+					//}
+				},
+				rangC(newVal, oldVal) {
+					vm.firRang = false;
+					var rangVals = newVal;
+					$("#mui-input-range span").attr("class", "mui-tooltip");
+					vm.wins = newVal;
+					vm.winRate = Number(newVal) - 1;
+					vm.failsT = parseFloat((98.5 / (Number(newVal) - 1)).toFixed(4));
+					vm.getGold = parseFloat((Number(vm.input) * Number(vm.failsT)).toFixed(4));
+					newVal = newVal + '% 100%';
+					$(".mui-input-range input[type=range]").css("background-size", newVal);
+				},
+				rangF(newVal) {
+					if(newVal == vm.playResultObj.throwCount) {
+						clearInterval(vm.timer);
+						//中奖
+						if(Number(vm.playResultObj.betCount) > Number(vm.playResultObj.throwCount)) {
+							mui.toast('恭喜你，投注' + vm.playResultObj.betCount +
+								',掷出' + vm.playResultObj.throwCount +
+								'，下注了' + vm.playResultObj.betsNo +
+								'个金币，赢得金币' + vm.playResultObj.reward, {
+									duration: 3000,
+									type: 'div'
+								});
+							setTimeout(function() {
+								vm.circleFlag = false;
+								vm.rangF = 0;
+							}, 3000)
+						} else {
+							mui.toast('很遗憾，投注' + vm.playResultObj.betCount + ',掷出' + vm.playResultObj.throwCount + ',下次再接再厉吧!', {
+								duration: 3000,
+								type: 'div'
+							});
+							setTimeout(function() {
+								vm.circleFlag = false;
+								vm.rangF = 0;
+							}, 3000)
+						}
+
+					}
+				}
+			},
+		})
+	</script>
+
+</html>

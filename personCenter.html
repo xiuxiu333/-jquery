@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>个人中心</title>
+    <link rel="stylesheet" href="css/all.css">
+    <script src="./js/jquery-3.3.1.min.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="header_portrait">
+        </div>
+        <div style="margin-left:1rem" class="username">
+        </div>
+    </div>
+    <!-- 余额部分 -->
+    <div class="balance_center">
+        <div><b>余额（元）</b></div>
+        <div class="money"></div>
+        <div style="margin-top:1rem"><b>剩余蓝钻:</b></div>
+        <div class="surplus"></div>
+
+    </div>
+    <!-- li -->
+    <ul class="module_center">
+        <li>
+            <a href="redpaper.html">
+                <img src="./img/minxi1.png" alt="">
+                <p style="color: black;">面对面红包</p>
+            </a>
+        </li>
+        <li>
+            <a href="invitation.html"> <img src="./img/xiaxian.png" alt="">
+                <p style="color: black;">我的邀请 </p>
+                <!-- <p class="oran" style="color: black;">0笔</p> -->
+            </a>
+        </li>
+        <li>
+            <a href="ThinkChange.html">
+                <img src="./img/ma.png" alt="">
+                <p style="color: black;">推广二维码</p>
+            </a>
+        </li>
+        <li>
+            <a href="gold.html">
+                <img src="./img/minxi1.png" alt="">
+                <p style="color: black;">领取金币</p>
+            </a>
+        </li>
+    </ul>
+    <script>
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg); //search,查询？后面的参数，并匹配正则
+            if (r != null) return unescape(r[2]);
+            return null;
+        }
+        // 调用方法
+        var getopenid = GetQueryString("openId")
+        //   alert(getopenid)     把openid这个接口后面带的openid   alert出来
+        window.localStorage.setItem("myid", "NYRjRfR0GQqCapo0")
+        $.ajax({
+            type: "POST",
+            url: 'https://www.shangdll.com/personCenter/detailInfo',
+            data: JSON.stringify({
+                "openId":  window.localStorage.getItem("myid") || []
+                // 在手机上测试已经拿到openid。在电脑上看不到效果,所以这个参数我们先写死,下个接口需要传这个接口响应的openid
+            }),
+            dataType: "json",
+            contentType: 'application/json; charset=UTF-8',
+            success: function (data) {
+                console.log(data)
+                var str = "<p>";
+                str += "<b>" + data.username + "</b>";
+                str += "<p>" + 'ID : ' + data.openId + "</p>";
+                str += "</p>";
+                $(".username").append(str);
+
+                var str = "<div>";
+                str += '<img src="' + data.headUrl + '"/>';
+                str += "</div>";
+                $(".header_portrait").append(str);
+                var str = "<b>";
+                str += "<b>" + data.gameGold + '元' + "</b>";
+                str += "</b>";
+                $(".money").append(str);
+                var str = "<b>";
+                str += "<b>" + data.surplusDiamond + "</b>";
+                str += "</b>";
+                $(".surplus").append(str);
+//              	//请求成功后去除地址栏后的参数
+//							var url = window.location.href;
+//							var valiable = url.split("?")[0];
+//							var json = {
+//								time: new Date().getTime()
+//							};
+//							window.history.replaceState(json, "", valiable);
+            },
+            error: function () {
+                console.log("错误")
+            }
+            
+        });
+    </script>
+</body>
+
+</html>

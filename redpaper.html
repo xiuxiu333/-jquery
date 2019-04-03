@@ -1,0 +1,233 @@
+<!DOCTYPE HTML>
+<html>
+	<title>我的红包</title>
+
+	<head>
+		<meta charset="UTF-8" />
+		<title></title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			
+			body {
+				background: url(./img/bj.png) top center no-repeat;
+				background-size: cover;
+			}
+			
+			ul {
+				width: 100%;
+				color: white;
+				font-size: 3rem;
+			}
+			
+			ul li {
+				color: white;
+				padding: 1rem;
+				box-sizing: border-box;
+				border-bottom: 1px solid rgba(102, 51, 153, 0.856);
+				border-radius: 0.5rem;
+			}
+			
+			#mask {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				z-index: 999;
+				background: #666;
+				opacity: 0.6;
+				/* filter: alpha(opacity=50)-moz-opacity: 0.5; */
+				display: none;
+			}
+			
+			.popup {
+				position: absolute;
+				left: 50%;
+				width: 30rem;
+				height: 50rem;
+				background: #fff;
+				z-index: 1000;
+				border: 1px solid #333;
+				display: none;
+				border-radius: 5rem;
+			}
+			
+			.popup h3 {
+				color: orange;
+				text-align: center;
+				margin-top: 11rem;
+			}
+			
+			.btn_close {
+				width: 60%;
+				background: orange;
+				color: white;
+				padding: 0.9rem;
+				position: absolute;
+				bottom: 22px;
+				border-radius: 2rem;
+				font-size: 2rem;
+				border: none;
+				left: 6rem;
+			}
+			
+			.btn_close2 {
+				width: 17%;
+				background: #80808070;
+				color: white;
+				padding: 0.9rem;
+				position: absolute;
+				top: 5px;
+				border-radius: 2rem;
+				font-size: 2rem;
+				border: none;
+				right: 15px;
+			}
+			
+			.baob {
+				color: red;
+				background: white;
+				margin: 2rem 1.5rem 1rem 1.5rem;
+				display: flex;
+				padding: 0.5rem;
+				border-radius: 0.5rem;
+			}
+			
+			.baob p {
+				color: red;
+				padding: 1rem;
+				display: flex;
+				justify-content: space-between;
+			}
+			
+			.baob .get {
+				color: red;
+				padding: 1rem;
+				width: 80%;
+				font-size: 2.8rem;
+			}
+			
+			.clik {
+				color: gray;
+				font-size: 2.2rem;
+				padding: 1rem;
+				border-top: 2px solid gainsboro;
+			}
+			
+			.clik1 {
+				display: flex;
+				justify-content: space-between;
+				padding: 1rem;
+			}
+			
+			.btn_show {
+				margin: 1rem;
+			}
+			
+			.popup {
+				background: url(./img/paper.jpg) top center no-repeat;
+				background-size: cover;
+			}
+		</style>
+	</head>
+
+	<body>
+		<ul>
+			<li id="mask"></li>
+			<!-- <li class="popup">
+     
+        </li> -->
+		</ul>
+		<script src="js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<!-- <script src="./js/utils.js"></script> -->
+		<script>
+			// console.log(getopenid)
+			$(function() {
+						$(document).on('click', ".btn_show", function() {
+							console.log("44444")
+							$('#mask').css({
+								display: 'block',
+								height: $(document).height()
+							})
+							var $Popup = $('.popup');
+							$Popup.css({
+								left: ($('body').width() - $Popup.width()) / 2 + 'px',
+								top: ($(window).height() - $Popup.height()) / 2 + $(window).scrollTop() +
+									'px',
+								display: 'block'
+							})
+						})
+
+						// localStorage.setItem("myid2",openId)
+						// 请求第一个接口——红包列表
+						var data = {
+							"openId": localStorage.getItem("myid")
+						}
+						// console.log(data,'000000')
+						$.ajax({
+							type: "POST",
+							url: "http://www.shangdll.com/personCenter/queryRedPacket",
+							async: true,
+							data: JSON.stringify(data),
+							dataType: "json",
+							contentType: 'application/json; charset=UTF-8',
+							success: function(res) {
+								var arr = res;
+								console.log(arr, 'redpaper111')
+								for(let i = 0; i < arr.length; i++) {
+									var title = arr[i].openId
+									console.log(title, 'oo')
+									localStorage.setItem("myid2", title)
+
+									$('ul').append(
+										`<div class="baob">
+                    <img src="./img/smal.jpg" alt="" class="btn_show">
+			    	<div class="get">
+                  <div class="clik1"> <div> 红包可领取</div>   <div> <b > ${arr[i].gameGold?arr[i].gameGold: '暂无红包0'}元</b></div>  </div> 
+                    <div class="clik">点击红包领取</div>
+                </div>
+                  </div>
+                  <div class="popup">
+                    <h3> ${arr[i].gameGold?arr[i].gameGold: '暂无红包0'}元</h3>
+                    <button class="btn_close">确定</button>
+                    <button class="btn_close2">X</button>
+                    </div>
+
+                  `);
+
+								}
+							}
+						});
+						// 请求第二个接口——领取红包
+						$(document).on('click', ".btn_close", function() {
+							$('#mask,.popup').css('display', 'none');
+							$.ajax({
+								type: "POST",
+								url: "https://www.shangdll.com/personCenter/receiveRedPacket",
+								async: true,
+								data: JSON.stringify({
+									"openId":  window.localStorage.getItem("myid2")
+								}),
+								dataType: "json",
+								contentType: 'application/json; charset=UTF-8',
+								success: function(data) {
+									console.log(data)
+									alert(data.message)
+								}
+							});
+						})
+						$(document).on('click', ".btn_close2", function() {
+							$('#mask,.popup').css('display', 'none');
+						})
+						$(document).ready(function() {
+								
+							}
+						})
+		</script>
+	</body>
+
+</html>

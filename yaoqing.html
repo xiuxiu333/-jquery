@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+  
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        body {
+            background: url(./img/bj.png) top center no-repeat;
+            background-size: cover;
+        }
+
+    
+
+        .tab {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            font-size: 50px;
+        }
+
+        .tab li {
+            float: left;
+            width: 50%;
+            height: 140px;
+            /*background: #ccc;*/
+            color: white;
+            /*border: 1px solid red;*/
+            text-align: center;
+            line-height: 140px;
+            cursor: pointer;
+        }
+
+        .try {
+            display: block;
+            width: 90%;
+            background: white;
+            margin: auto;
+            text-align: center;
+            border-radius: 1rem;
+            margin-top: 0.5rem;
+
+        }
+        div{
+            margin: 0;
+            padding: 0;
+            width: 90%;
+            border: 1px solid #ccc;
+            display: none;
+            font-size: 50px;
+            background: white;
+            margin: auto;
+            text-align: center;
+            border-radius: 1rem;
+            margin-top: 0.5rem;
+        }
+        .tab li.cur {
+            /*background: blue;*/
+
+            border-bottom: 2px solid white;
+        }
+
+        /* .mun .munn {
+            width: 100%;
+            display: flex;
+            font-size: 1rem;
+            padding: 0.5rem;
+            box-sizing: border-box;
+            border: 2px solid ghostwhite;
+            text-align: left;
+            text-overflow: ellipsis;
+        }
+
+        .mun .munn2 {
+            padding: 0.5rem;
+            box-sizing: border-box;
+        }
+
+        .mun img {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+        } */
+    </style>
+</head>
+<script src="./js/jquery-3.3.1.min.js"></script>
+<body>
+    <ul class="tab">
+        <li class="cur">我邀请的人</li>
+        <li>排行榜</li>
+    </ul>
+    <!--我邀请的人-->
+    <div class="try">我邀请的人</div>
+    <!--排行榜-->
+    <div>
+        <span class="mun">
+
+
+
+        </span>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".tab li").click(function () {
+                $(".tab li").eq($(this).index()).addClass("cur").siblings().removeClass('cur');
+                $("div").hide().eq($(this).index()).show();
+                //另一种方法: $("div").eq($(".tab li").index(this)).addClass("on").siblings().removeClass('on'); 
+
+            });
+        });
+
+  // 获取接口
+  $.ajax({
+            type: "POST",
+            url: 'http://www.shangdll.com/personCenter/myInvitation',
+            data: JSON.stringify({
+                "openId":  window.localStorage.getItem("myid")
+            }),
+            dataType: "json",
+            contentType: 'application/json; charset=UTF-8',
+
+            success: function (data) {
+                console.log(data)
+                // var str = "<p>";
+                // str += "<b>" + data.shareCode + "</b>";
+                // str += "</p>";
+                // $(".yaoqin").append(str);
+
+                // var str = "<div>";
+                // str += '<img src="' + data.headUrl + '" />';
+                // str += "</div>";
+                // $(".pic").append(str);
+
+                // var str = "<b>";
+                // str += "<b>" + data.friendCount + "</b>";
+                // str += "</b>";
+                // $(".goodfriend").append(str);
+
+                // var str = "<b>";
+                // str += "<b>" + data.totalProfit + "</b>";
+                // str += "</b>";
+                // $(".totalrevenue").append(str);
+
+                // var str = "<b>";
+                // str += "<b>" + data.invitationAward + "</b>";
+                // str += "</b>";
+                // $(".schemes").append(str);
+
+                // // 渲染邀请的好友列表       
+                // var arr = data.memberInfoList
+                // console.log(arr)
+                // for (let i = 0; i < arr.length; i++) {
+                //     console.log(i)
+                //     $('.try').append(
+                //         ` <div class="trytry">                
+                //         <div class="pict">           
+                //            <a href="details.html">
+                //             <img src="+arr[i].headUrl+"/>
+                //             </a> </div>
+                //         <div>
+                //           <p>  <b>${arr[i].userName}</b></p> 
+                //            <div> <img src="./img/yi.png" alt="" class="yi"><div> 
+                //              </div></div>`
+                //     );
+                // }
+            },
+            error: function () {
+                console.log("错误")
+            }
+        });
+
+		// 获取排行榜接口
+		$.ajax({
+			type: "POST",
+			url: 'https://www.shangdll.com/personCenter/rankingList',
+			dataType: "json",
+			contentType: 'application/json; charset=UTF- 8',
+			success: function (data) {
+				var arr = data;
+				console.log(arr, '99999')
+				for (let i = 0; i < arr.length; i++) {
+					$('.mun').append(
+						`<span class='munn'>
+                         <span> <img src="+ 'data.headUrl' + "/>  </span>
+                         <span class='munn2'>  
+                         <span> <b> ${arr[i].username}</b> </span>
+                         <span> ${"累计投注次数："+arr[i].investNo} ${"投注金额："+arr[i].bettingMoney}</span>
+                         <span>  ${"奖金："+arr[i].gameGold}</span>
+                         </span>
+                         </span>`
+					);
+
+				}
+			},
+			error: function () {
+				console.log("错误")
+			}
+		});
+        
+    </script>
+</body>
+
+</html>
