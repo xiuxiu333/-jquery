@@ -61,8 +61,8 @@
         }
         // 调用方法
         var getopenid = GetQueryString("openId")
-        //   alert(getopenid)     把openid这个接口后面带的openid   alert出来
-        window.localStorage.setItem("myid", "NYRjRfR0GQqCapo0")
+        //   alert(getopenid)     把openid这个接口后面带的openid   alert出来"NYRjRfR0GQqCapo0"
+        window.localStorage.setItem("myid", getopenid)
         $.ajax({
             type: "POST",
             url: 'https://www.shangdll.com/personCenter/detailInfo',
